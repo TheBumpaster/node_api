@@ -10,6 +10,6 @@ initializeServerEnvironment();
  * Initialize express server
  * @variable {Express} server
  */
-const server = new Express();
+const server = new Express(Number(process.env.PORT));
 
 export default server;

@@ -23,6 +23,7 @@ class Logger {
                 level: 'warn',
                 defaultMeta: {
                     filename: meta.filename,
+                    env,
                 },
                 transports: [
                     new transports.File({
@@ -40,6 +41,7 @@ class Logger {
                 level: 'info',
                 defaultMeta: {
                     service: meta.filename,
+                    env,
                 },
                 transports: [
                     new transports.Console({

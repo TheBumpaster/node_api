@@ -25,7 +25,7 @@ class Express {
     /**
      * Create and initialize express API routes
      */
-    constructor() {
+    constructor(port: number) {
         // Initialize express
         this.app = express();
 
@@ -34,15 +34,17 @@ class Express {
         // Add API Router
         ExpressRouter.initializeRouter(this.app);
 
-        this.initialize();
+        this.initialize(port);
     }
 
     /**
+     *
      * Start listening to specific port and creates a server instance
+     * @param port
      */
-    private initialize(): void {
-        this.server = this.app.listen(Number(process.env.port), () => {
-            this.logger.info(`App is up and running on port ${process.env.port}`);
+    private initialize(port: number): void {
+        this.server = this.app.listen(port, () => {
+            this.logger.info(`App is up and running on port ${port}`);
         });
     }
 

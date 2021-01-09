@@ -6,7 +6,7 @@ process.env.port = '3003';
 process.env.NODE_ENV = 'testing';
 ava.before(async (t) => {
     try {
-        t.context.server = new Express();
+        t.context.server = new Express(3003);
         t.context.port = !!process.env.port ? Number(process.env.port) : 5000;
         t.context.host = 'http://localhost';
     } catch (e) {
