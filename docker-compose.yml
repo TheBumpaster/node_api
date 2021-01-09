@@ -1,0 +1,17 @@
+version: '3'
+services:
+    server:
+        env_file: .env
+        container_name: 'template_node_server'
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                NODE: production
+                PORT: ${PORT}
+        environment:
+            - 'PORT=${PORT}'
+        ports:
+            - '${PORT}:${PORT}'
+        restart: 'always'
+        command: npm run start

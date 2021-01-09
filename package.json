@@ -1,0 +1,50 @@
+{
+    "name": "template_node_ts",
+    "version": "1.0.0",
+    "description": "TypeScript NodeJS Docker",
+    "main": "index.js",
+    "scripts": {
+        "build": "npm run lint && tsc",
+        "start": "node dist/index.js",
+        "lint": "eslint server/**/*.ts --quiet --fix",
+        "pretest": "npm run build",
+        "test": "ava"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TheBumpaster/template_node_ts.git"
+    },
+    "keywords": [
+        "nodejs",
+        "typescript"
+    ],
+    "author": "Ismar Hadzic",
+    "license": "SEE LICENSE IN LICENSE",
+    "bugs": {
+        "url": "https://github.com/TheBumpaster/template_node_ts/issues"
+    },
+    "homepage": "https://github.com/TheBumpaster/template_node_ts#readme",
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run build",
+            "pre-push": "npm run test"
+        }
+    },
+    "dependencies": {
+        "winston": "3.3.3"
+    },
+    "devDependencies": {
+        "@types/winston": "",
+        "@types/node": "14.14.20",
+        "@typescript-eslint/eslint-plugin": "4.12.0",
+        "@typescript-eslint/parser": "4.12.0",
+        "ava": "3.15.0",
+        "test-listen": "1.1.0",
+        "eslint": "7.10.0",
+        "eslint-config-prettier": "^7.1.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "prettier": "^2.2.1",
+        "typescript": "3.4.3",
+        "husky": "4.3.0"
+    }
+}
