@@ -3,7 +3,7 @@ import SystemRouter from './v1/system';
 import UserRouter from './v1/users';
 
 class ExpressRouter {
-    public static initializeRouter(app: Application) {
+    public static initializeRouter(app: Application): void {
         app.use('/api/v1/', new SystemRouter().getRouter());
         app.use('/api/v1/users/', new UserRouter().getRouter());
 
