@@ -1,0 +1,11 @@
+{
+    "restart": "rs",
+    "watch": ["server/**/*.ts"],
+    "ext": "ts",
+    "ignore": ["./tests/**/*.*"],
+    "exec": "node ./index",
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "verbose": true
+}
