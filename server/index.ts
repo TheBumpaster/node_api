@@ -6,7 +6,7 @@ const server: Server = createServer((request: IncomingMessage, response: ServerR
     response.end();
 });
 
-const port = !!process.env.port ? Number(process.env.port) : 3000;
+const port = !!process.env.port ? Number(process.env.port) : 5000;
 
 server.listen(port, () => {
     console.log(`Server is up and running on port ${port}`);
