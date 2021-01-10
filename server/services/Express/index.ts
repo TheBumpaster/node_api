@@ -48,16 +48,6 @@ class Express {
         this.app.use(urlencoded({ limit: '501mb', extended: false }));
 
         // Create database store client for session
-        const databaseStore = new MongoDBStore({
-            uri: generateMongoDBURI(),
-            collection: 'sessions',
-            expires: 1000 * 60 * 60 * 24 * 15, // 15 days in milliseconds
-            connectionOptions: {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                serverSelectionTimeoutMS: 10000,
-            },
-        });
         // Handle sessions for security
         this.app.use(
             session({
@@ -67,13 +57,21 @@ class Express {
                 cookie: {
                     secure: true,
                 },
-                store: databaseStore,
+                store:
+                    process.env.NODE_ENV !== 'testing'
+                        ? new MongoDBStore({
+                              uri: generateMongoDBURI(),
+                              collection: 'sessions',
+                              expires: 1000 * 60 * 60 * 24 * 15, // 15 days in milliseconds
+                              connectionOptions: {
+                                  useNewUrlParser: true,
+                                  useUnifiedTopology: true,
+                                  serverSelectionTimeoutMS: 10000,
+                              },
+                          })
+                        : undefined,
             }),
         );
-        // Handle store error events
-        databaseStore.on('error', (error) => {
-            this.logger.error('Could not establish store connection', error);
-        });
 
         // Add API Router
         ExpressRouter.initializeRouter(this.app);
