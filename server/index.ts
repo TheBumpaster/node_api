@@ -1,10 +1,12 @@
 import Express from './services/Express/index';
 import { initializeServerEnvironment } from './services/Environment';
+import { initializeMongooseDatabaseConnection } from './services/Database';
 
 // Initialize environment
 initializeServerEnvironment();
 
 // Initialize database connection
+initializeMongooseDatabaseConnection();
 
 /**
  * Initialize express server

@@ -17,17 +17,16 @@ class Logger {
      * @param meta
      * @param env
      */
-    constructor(meta: { filename: string }, env = process.env.NODE_ENV) {
+    constructor(meta: { service: string; filename: string }, env = process.env.NODE_ENV) {
         if (env === 'production') {
             this.engine = createLogger({
                 level: 'warn',
                 defaultMeta: {
-                    filename: meta.filename,
                     env,
                 },
                 transports: [
                     new transports.File({
-                        format: format.json(),
+                        format: format.combine(format.label({ label: meta.filename }), format.json()),
                         dirname: join(__dirname, '../../log'),
                         filename: 'activity.log',
                         tailable: true,
@@ -35,7 +34,16 @@ class Logger {
                 ],
             });
         } else {
-            const logFormat = format.combine(format.label(), format.timestamp(), format.colorize(), format.simple());
+            const myFormat = format.printf(({ level, message, label, timestamp }) => {
+                return `${timestamp} [${label}] ${level}: ${message}`;
+            });
+
+            const logFormat = format.combine(
+                format.label({ label: meta.service, message: false }),
+                format.timestamp(),
+                format.colorize(),
+                myFormat,
+            );
 
             this.engine = createLogger({
                 level: 'info',

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>default | nodejs_api</title>
+	<title>services/Database | nodejs_api</title>
 	<meta name="description" content="Documentation for nodejs_api">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,85 +55,83 @@
 					<a href="../modules.html">nodejs_api</a>
 				</li>
 				<li>
-					<a href="../modules/api_router.html">api/router</a>
-				</li>
-				<li>
-					<a href="api_router.default.html">default</a>
+					<a href="services_database.html">services/Database</a>
 				</li>
 			</ul>
-			<h1>Class default</h1>
+			<h1>Module services/Database</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">default</span>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="api_router.default.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="api_router.default.html#initializerouter" class="tsd-kind-icon">initialize<wbr>Router</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="services_database.html#generatemongodburi" class="tsd-kind-icon">generate<wbr>MongoDBURI</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="services_database.html#initializemongoosedatabaseconnection" class="tsd-kind-icon">initialize<wbr>Mongoose<wbr>Database<wbr>Connection</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="api_router.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="api_router.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="initializerouter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> initialize<wbr>Router</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">initialize<wbr>Router<span class="tsd-signature-symbol">(</span>app<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Application</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generatemongodburi" class="tsd-anchor"></a>
+					<h3>generate<wbr>MongoDBURI</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>MongoDBURI<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TheBumpaster/node_api/blob/7afc942/server/api/router.ts#L11">api/router.ts:11</a></li>
+									<li>Defined in services/Database/index.ts:59</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>app: <span class="tsd-signature-type">Application</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates our connection uri</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd><p>generateMongoDBURI</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="initializemongoosedatabaseconnection" class="tsd-anchor"></a>
+					<h3>initialize<wbr>Mongoose<wbr>Database<wbr>Connection</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">initialize<wbr>Mongoose<wbr>Database<wbr>Connection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">mongoose.Mongoose</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in services/Database/index.ts:11</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a connection with MongoDB Atlas with mongoose client</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd><p>initializeMongooseDatabaseConnection</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">mongoose.Mongoose</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -145,55 +143,46 @@
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="api_router.html">api/router</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="api_v1_system.html">api/v1/system</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="api_v1_system_controller.html">api/v1/system/controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="api_v1_users.html">api/v1/users</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="api_v1_users_controller.html">api/v1/users/controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="index.html">index</a>
+					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/api_router.html">api/router</a>
+						<a href="services_database.html">services/<wbr>Database</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/api_v1_system.html">api/v1/system</a>
+						<a href="services_environment.html">services/<wbr>Environment</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/api_v1_system_controller.html">api/v1/system/controller</a>
+						<a href="services_express.html">services/<wbr>Express</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/api_v1_users.html">api/v1/users</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/api_v1_users_controller.html">api/v1/users/controller</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/services_database.html">services/<wbr>Database</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/services_environment.html">services/<wbr>Environment</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/services_express.html">services/<wbr>Express</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/services_logger.html">services/<wbr>Logger</a>
+						<a href="services_logger.html">services/<wbr>Logger</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="api_router.default.html" class="tsd-kind-icon">default</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="api_router.default.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="api_router.default.html#initializerouter" class="tsd-kind-icon">initialize<wbr>Router</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="services_database.html#generatemongodburi" class="tsd-kind-icon">generate<wbr>MongoDBURI</a>
 					</li>
-				</ul>
-				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="services_database.html#initializemongoosedatabaseconnection" class="tsd-kind-icon">initialize<wbr>Mongoose<wbr>Database<wbr>Connection</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -209,10 +198,6 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
