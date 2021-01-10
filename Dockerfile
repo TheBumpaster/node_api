@@ -29,9 +29,8 @@ RUN npm run build
 
 ARG NODE=production
 ENV NODE_ENV ${NODE}
-ARG PORT
 
 # Make port from arguments available to the world outside this container
-EXPOSE $PORT
+EXPOSE 5000
 
 CMD [ "npm", "run", "start" ]

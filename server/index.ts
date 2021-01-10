@@ -1,15 +1,17 @@
-import { createServer, Server, IncomingMessage, ServerResponse } from 'http';
+import Express from './services/Express/index';
+import { initializeServerEnvironment } from './services/Environment';
+import { initializeMongooseDatabaseConnection } from './services/Database';
 
-const server: Server = createServer((request: IncomingMessage, response: ServerResponse) => {
-    response.writeHead(200, { 'Content-Type': 'application/json' });
-    response.write(JSON.stringify({ message: 'Hello world!' }));
-    response.end();
-});
+// Initialize environment
+initializeServerEnvironment();
 
-const port = !!process.env.port ? Number(process.env.port) : 3000;
+// Initialize database connection
+initializeMongooseDatabaseConnection();
 
-server.listen(port, () => {
-    console.log(`Server is up and running on port ${port}`);
-});
+/**
+ * Initialize express server
+ * @variable {Express} server
+ */
+const server = new Express(Number(process.env.PORT));
 
-export { server };
+export default server;
