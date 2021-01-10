@@ -4,11 +4,14 @@ const { default: Express } = require('../dist/services/Express/index.js');
 
 process.env.port = '3003';
 process.env.NODE_ENV = 'testing';
+process.env.HOST = 'http://localhost';
+process.env.SECRET = 'testing12345!!';
+
 ava.before(async (t) => {
     try {
         t.context.server = new Express(3003);
         t.context.port = !!process.env.port ? Number(process.env.port) : 5000;
-        t.context.host = 'http://localhost';
+        t.context.host = process.env.HOST;
     } catch (e) {
         console.log(server);
         console.error(e);
