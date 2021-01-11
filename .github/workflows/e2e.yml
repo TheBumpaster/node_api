@@ -7,7 +7,7 @@ on:
         branches: [main, develop]
 
 jobs:
-    metrics:
+    integration:
         runs-on: ubuntu-latest
 
         steps:
