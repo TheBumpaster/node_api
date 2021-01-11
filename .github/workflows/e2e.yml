@@ -7,19 +7,14 @@ on:
         branches: [main, develop]
 
 jobs:
-    build:
+    integration:
       runs-on: ubuntu-latest
       steps:
           - name: Build the server
             uses: actions/checkout@v1
-            uses: actions/setup-node@v2
+            uses: actions/setup-node@v1
             with:
                 node-version: '12'
-          - run: npm install
+          - run: npm install --quiet
           - run: npm run build
-    test:
-      runs-on: ubuntu-latest
-      needs: [build]
-      steps:
-        - name: Run Tests on the server
-        - run: npm run test
+          - run: npm run test
