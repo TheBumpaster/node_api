@@ -52,7 +52,7 @@ class Express {
         this.app.use(
             session({
                 secret: process.env.SECRET,
-                resave: false,
+                resave: true,
                 saveUninitialized: true,
                 cookie: {
                     secure: true,
@@ -62,7 +62,7 @@ class Express {
                         ? new MongoDBStore({
                               uri: generateMongoDBURI(),
                               collection: 'sessions',
-                              expires: 1000 * 60 * 60 * 24 * 15, // 15 days in milliseconds
+                              expires: 1000 * 60 * 60 * 24 * 1, // 1 day in milliseconds
                               connectionOptions: {
                                   useNewUrlParser: true,
                                   useUnifiedTopology: true,

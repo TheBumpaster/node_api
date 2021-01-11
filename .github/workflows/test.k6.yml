@@ -1,13 +1,19 @@
-name: k6 cloud test run
+name: K6 Test
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
 jobs:
-    build:
+    smoke:
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout
               uses: actions/checkout@v1
-            - name: Run k6 cloud test
+            - name: Run k6 smoke test
               uses: k6io/action@v0.1
               with:
                   filename: tests/test.js
-                  cloud: true
-                  token: ${{ secrets.K6_CLOUD_API_TOKEN }}
