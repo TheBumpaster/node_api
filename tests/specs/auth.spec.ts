@@ -1,9 +1,5 @@
-import * as dotenv from 'dotenv';
-import { initializeMongooseDatabaseConnection } from '../../server/services/Database';
-import { initializeServerEnvironment } from '../../server/services/Environment';
-import Express from '../../server/services/Express/index';
+import app from '../../server/index';
 import * as faker from 'faker';
-import { hashPassword } from '../../server/api/middleware/password';
 const chaiHttp = require('chai-http');
 const chai = require('chai');
 
@@ -14,11 +10,10 @@ let server;
 describe('Authorization tests', function () {
     this.timeout(120000);
     before((done) => {
-        initializeServerEnvironment();
-        initializeMongooseDatabaseConnection().then(() => {
-            server = new Express(Number(process.env.PORT));
+        server = app.server;
+        setTimeout(() => {
             done();
-        });
+        }, 3000);
     });
 
     describe('Successfull scenario', () => {
