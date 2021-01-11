@@ -6,10 +6,12 @@ import { join } from 'path';
 import SystemRouter from './v1/system';
 import UserRouter from './v1/users';
 import * as swaggerUi from 'swagger-ui-express';
+import AuthRouter from './v1/auth';
 
 class ExpressRouter {
     public static initializeRouter(app: Application): void {
         app.use('/api/v1/', new SystemRouter().getRouter());
+        app.use('/api/v1/auth/', new AuthRouter().getRouter());
         app.use('/api/v1/users/', new UserRouter().getRouter());
 
         // if deployed for development
