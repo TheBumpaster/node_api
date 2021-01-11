@@ -1,0 +1,13 @@
+name: Smoke Workflow
+on: [push]
+jobs:
+  build:
+    name: Run k6 test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run k6 local smoke test
+        uses: k6io/action@v0.1
+        with:
+          filename: tests/test.js
