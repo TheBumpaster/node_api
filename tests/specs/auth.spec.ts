@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 let server;
 
 describe('Authorization tests', function () {
-    this.timeout(10000);
+    this.timeout(100000);
     before(async () => {
         dotenv.config();
         process.env.NODE_ENV = 'testing';
