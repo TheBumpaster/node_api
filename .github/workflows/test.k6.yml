@@ -16,4 +16,34 @@ jobs:
             - name: Run k6 smoke test
               uses: k6io/action@v0.1
               with:
-                  filename: tests/test.js
+                  filename: tests/smoke.js
+    load:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Run k6 smoke test
+              uses: k6io/action@v0.1
+              with:
+                  filename: tests/load.js
+    stress:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Run k6 smoke test
+              uses: k6io/action@v0.1
+              with:
+                  filename: tests/stress.js
+    spike:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Run k6 smoke test
+              uses: k6io/action@v0.1
+              with:
+                  filename: tests/spike.js
