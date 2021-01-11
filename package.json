@@ -69,7 +69,7 @@
         "husky": "4.3.0",
         "k6": "0.0.0",
         "mocha": "^8.2.1",
-        "mockgoose": "^8.0.4",
+        "mongodb-memory-server": "^6.9.2",
         "nodemon": "^2.0.7",
         "prettier": "^2.2.1",
         "test-listen": "1.1.0",
