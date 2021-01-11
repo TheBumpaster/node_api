@@ -1,20 +1,19 @@
-name: K6 Smoke Test
+name: K6 Test
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 jobs:
-  build:
+    smoke:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Run local k6 test
-      uses: k6io/action@v0.1
-      with:
-        filename: tests/test.js
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Run k6 smoke test
+              uses: k6io/action@v0.1
+              with:
+                  filename: tests/test.js
