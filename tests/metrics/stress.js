@@ -5,13 +5,17 @@ import { Rate } from 'k6/metrics';
 const failureRate = new Rate('check_failure_rate');
 
 export let options = {
-    vus: 1,
-    duration: '30s',
-    thresholds: {
-        http_req_duration: ['p(95)<1000'],
-        'http_req_duration{staticAsset:yes}': ['p(99)<850'],
-        check_failure_rate: ['rate<0.01', { threshold: 'rate<=0.05', abortOnFail: true }],
-    },
+    stages: [
+        { duration: '2m', target: 100 }, // below normal load
+        { duration: '5m', target: 100 },
+        { duration: '2m', target: 200 }, // normal load
+        { duration: '5m', target: 200 },
+        { duration: '2m', target: 300 }, // around the breaking point
+        { duration: '5m', target: 300 },
+        { duration: '2m', target: 400 }, // beyond the breaking point
+        { duration: '5m', target: 400 },
+        { duration: '10m', target: 0 }, // scale down. Recovery stage.
+    ],
 };
 
 export function setup() {}
