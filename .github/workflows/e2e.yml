@@ -8,13 +8,12 @@ on:
 
 jobs:
     integration:
-      runs-on: ubuntu-latest
-      steps:
-          - name: Build the server
-            uses: actions/checkout@v1
-            uses: actions/setup-node@v1
-            with:
-                node-version: '12'
-          - run: npm install --quiet
-          - run: npm run build
-          - run: npm run test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Build the server
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12'
+            - run: npm install --quiet
+            - run: npm run build
+            - run: npm run test
