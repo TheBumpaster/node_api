@@ -7,7 +7,7 @@ on:
         branches: [main]
 
 jobs:
-    tests:
+    metrics:
         runs-on: ubuntu-latest
 
         steps:
@@ -16,16 +16,16 @@ jobs:
             - name: Run k6 smoke test
               uses: k6io/action@v0.1
               with:
-                  filename: tests/smoke.js
+                  filename: tests/metrics/smoke.js
             - name: Run k6 load test
               uses: k6io/action@v0.1
               with:
-                  filename: tests/load.js
+                  filename: tests/metrics/load.js
             - name: Run k6 stress test
               uses: k6io/action@v0.1
               with:
-                  filename: tests/stress.js
+                  filename: tests/metrics/stress.js
             - name: Run k6 spike test
               uses: k6io/action@v0.1
               with:
-                  filename: tests/spike.js
+                  filename: tests/metrics/spike.js
