@@ -1,0 +1,22 @@
+name: E2E Tests
+
+on:
+    push:
+        branches: [main, develop]
+    pull_request:
+        branches: [main, develop]
+
+jobs:
+    metrics:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Run All E2E Tests
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12.x'
+            - run: npm ci
+            - run: npm run build --if-present
+            - run: npm run test
