@@ -7,7 +7,7 @@ on:
         branches: [main]
 
 jobs:
-    smoke:
+    tests:
         runs-on: ubuntu-latest
 
         steps:
@@ -17,33 +17,15 @@ jobs:
               uses: k6io/action@v0.1
               with:
                   filename: tests/smoke.js
-    load:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v1
-            - name: Run k6 smoke test
+            - name: Run k6 load test
               uses: k6io/action@v0.1
               with:
                   filename: tests/load.js
-    stress:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v1
-            - name: Run k6 smoke test
+            - name: Run k6 stress test
               uses: k6io/action@v0.1
               with:
                   filename: tests/stress.js
-    spike:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v1
-            - name: Run k6 smoke test
+            - name: Run k6 spike test
               uses: k6io/action@v0.1
               with:
                   filename: tests/spike.js
