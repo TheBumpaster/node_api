@@ -9,15 +9,15 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 let server;
-
 describe('Authorization tests', function () {
-    this.timeout(100000);
-    before(async () => {
+    this.timeout(120000);
+    before((done) => {
         dotenv.config();
         process.env.NODE_ENV = 'testing';
-        await initializeMongooseDatabaseConnection();
-
-        server = new Express(Number(process.env.PORT));
+        initializeMongooseDatabaseConnection().then(() => {
+            server = new Express(Number(process.env.PORT));
+            done();
+        });
     });
 
     describe('Successfull scenario', () => {
