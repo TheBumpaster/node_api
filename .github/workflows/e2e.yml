@@ -8,13 +8,16 @@ on:
 
 jobs:
     integration:
+      timeout-minutes: 10
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: Build the server
               uses: actions/setup-node@v1
               with:
                   node-version: '12'
-            - run: npm install --quiet
-            - run: npm run build
-            - run: npm run test
+              run: npm install
+              run: npm run build
+            - name: Run Tests in background
+              run: npm run test
