@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import { initializeMongooseDatabaseConnection } from '../../server/services/Database';
+import { initializeServerEnvironment } from '../../server/services/Environment';
 import Express from '../../server/services/Express/index';
 import * as faker from 'faker';
 import { hashPassword } from '../../server/api/middleware/password';
@@ -13,9 +14,7 @@ let server;
 describe('Authorization tests', function () {
     this.timeout(120000);
     before((done) => {
-        dotenv.config();
-        process.env.NODE_ENV = 'testing';
-        process.env.SECRET = hashPassword(new Date().toDateString());
+        initializeServerEnvironment();
         initializeMongooseDatabaseConnection().then(() => {
             server = new Express(Number(process.env.PORT));
             done();
