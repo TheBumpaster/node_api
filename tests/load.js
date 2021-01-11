@@ -11,8 +11,8 @@ export let options = {
         { duration: '5m', target: 0 }, // ramp-down to 0 users
     ],
     thresholds: {
-        http_req_duration: ['p(95)<1000'],
-        'http_req_duration{staticAsset:yes}': ['p(99)<850'],
+        http_req_duration: ['p(95)<10000'],
+        'http_req_duration{staticAsset:yes}': ['p(99)<8500'],
         check_failure_rate: ['rate<0.01', { threshold: 'rate<=0.05', abortOnFail: true }],
     },
 };

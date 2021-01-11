@@ -14,11 +14,6 @@ export let options = {
         { duration: '3m', target: 100 },
         { duration: '10s', target: 0 },
     ],
-    thresholds: {
-        http_req_duration: ['p(95)<5000'],
-        'http_req_duration{staticAsset:yes}': ['p(99)<1850'],
-        check_failure_rate: ['rate<0.01', { threshold: 'rate<=0.05', abortOnFail: true }],
-    },
 };
 
 export function setup() {}

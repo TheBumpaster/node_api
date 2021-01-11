@@ -16,11 +16,6 @@ export let options = {
         { duration: '5m', target: 400 },
         { duration: '10m', target: 0 }, // scale down. Recovery stage.
     ],
-    thresholds: {
-        http_req_duration: ['p(95)<5000'],
-        'http_req_duration{staticAsset:yes}': ['p(99)<1850'],
-        check_failure_rate: ['rate<0.01', { threshold: 'rate<=0.05', abortOnFail: true }],
-    },
 };
 
 export function setup() {}

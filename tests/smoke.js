@@ -8,8 +8,8 @@ export let options = {
     vus: 1,
     duration: '30s',
     thresholds: {
-        http_req_duration: ['p(95)<1000'],
-        'http_req_duration{staticAsset:yes}': ['p(99)<850'],
+        http_req_duration: ['p(95)<10000'],
+        'http_req_duration{staticAsset:yes}': ['p(99)<8500'],
         check_failure_rate: ['rate<0.01', { threshold: 'rate<=0.05', abortOnFail: true }],
     },
 };
