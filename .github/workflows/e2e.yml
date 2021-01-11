@@ -13,10 +13,11 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
-            - name: Build the server
+            - name: Setup the node
               uses: actions/setup-node@v1
               with:
                   node-version: '12'
+            - name: Install & Build
               run: npm install
               run: npm run build
             - name: Run Tests in background
