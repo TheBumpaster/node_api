@@ -48,6 +48,9 @@ class Express {
      */
     constructor(port: number) {
         // Initialize express
+        this.emmitter.on('ready', () => {
+            this.logger.info('Application is ready.');
+        });
         this.app = express();
         newRelic.instrumentLoadedModule('express', this.app);
 
@@ -102,7 +105,7 @@ class Express {
      */
     private initialize(port: number): void {
         this.server = this.app.listen(port, () => {
-            this.logger.info(`App is up and running on port ${port}`);
+            this.logger.warn(`App is up and running on port ${port}`);
             this.setState('running');
         });
     }
