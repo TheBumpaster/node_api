@@ -4,13 +4,13 @@
     "description": "TypeScript NodeJS Docker",
     "main": "index.js",
     "scripts": {
-        "dev": "npm run docs && nodemon -r dotenv/config",
+        "dev": "npm run postbuild && nodemon -r dotenv/config",
         "build": "npm run lint && tsc",
+        "postbuild": "typedoc server/",
         "start": "node dist/index.js",
         "lint": "eslint server/**/*.ts --quiet --fix",
-        "test": "mocha --require ts-node/register --require source-map-support/register ./tests/**/*.spec.ts --colors --full-trace --exit",
-        "k6": "k6 run tests/test.js",
-        "docs": "typedoc server/"
+        "k6": "k6 run k6/smoke.js",
+        "test": "mocha tests/**/*.js --full-trace --colors --exit"
     },
     "repository": {
         "type": "git",
@@ -49,7 +49,6 @@
     },
     "devDependencies": {
         "@types/chai": "^4.2.14",
-        "@types/chai-http": "^4.2.0",
         "@types/connect-mongodb-session": "^2.4.0",
         "@types/express": "^4.17.9",
         "@types/express-session": "^1.17.3",
@@ -60,7 +59,6 @@
         "@typescript-eslint/eslint-plugin": "4.12.0",
         "@typescript-eslint/parser": "4.12.0",
         "chai": "^4.2.0",
-        "chai-http": "^4.3.0",
         "dotenv": "8.2.0",
         "eslint": "7.10.0",
         "eslint-config-prettier": "^7.1.0",
@@ -72,6 +70,7 @@
         "mongodb-memory-server": "^6.9.2",
         "nodemon": "^2.0.7",
         "prettier": "^2.2.1",
+        "supertest": "^6.0.1",
         "test-listen": "1.1.0",
         "ts-node": "^9.1.1",
         "typedoc": "^0.20.13",
