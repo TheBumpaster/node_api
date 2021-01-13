@@ -9,12 +9,12 @@ export interface IAuthRequest extends Request {
 export interface IAuthSession extends Session {
     user: { _id: string; token: string };
 }
-export function authenticationMiddleware(request: IAuthRequest, response: Response, next: NextFunction): void {
+export function authenticationMiddleware(request: IAuthRequest, response: Response, next: NextFunction): unknown {
     const token = request.header('Authorization');
 
     if (!token) {
         response.status(401);
-        response.json({
+        return response.json({
             status: false,
             message: 'You need to be authorized.',
         });
@@ -23,7 +23,7 @@ export function authenticationMiddleware(request: IAuthRequest, response: Respon
     verify(token, process.env.SECRET, (error, user) => {
         if (error) {
             response.status(401);
-            response.json({
+            return response.json({
                 status: false,
                 message: 'Invalid token.',
             });
@@ -31,7 +31,7 @@ export function authenticationMiddleware(request: IAuthRequest, response: Respon
 
         if (!user) {
             response.status(401);
-            response.json({
+            return response.json({
                 status: false,
                 message: 'Invalid token.',
             });

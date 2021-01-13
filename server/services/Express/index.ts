@@ -11,6 +11,7 @@ import * as session from 'express-session';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MongoDBStore = require('connect-mongodb-session')(session);
 import { generateMongoDBURI } from '../Database';
+import { EventEmitter } from 'events';
 
 /**
  * Main expressJS class settings
@@ -20,22 +21,33 @@ class Express {
      * @variable {Logger} logger
      */
     private logger = new Logger({ service: 'Express', filename: __filename });
-
-    /**
-     * @variable {Application} app
-     */
-    public app: Application;
     /**
      * @variable {Server} server
      */
     private server: Server;
+    /**
+     * @variable {Application} app
+     */
+    public app: Application;
 
+    /**
+     * Current state value 'initializing'|'ready'|'error'|'closed'|'running'
+     * @variable {string} state
+     */
+    public state: string;
+
+    /**
+     * NodeJS Event Emiiter used to pipe events on init.
+     * @variable {EventEmitter} emitter
+     */
+    private emmitter: EventEmitter = new EventEmitter();
     /**
      * Create and initialize express API routes
      */
     constructor(port: number) {
         // Initialize express
         this.app = express();
+        this.setState('initializing');
 
         // Add security checks
         this.app.disable('x-powered-by');
@@ -87,7 +99,17 @@ class Express {
     private initialize(port: number): void {
         this.server = this.app.listen(port, () => {
             this.logger.info(`App is up and running on port ${port}`);
+            this.setState('running');
         });
+    }
+
+    /**
+     * Setter function
+     * @param state
+     */
+    public setState(state: string): void {
+        this.state = state;
+        this.emmitter.emit(state);
     }
 
     /**
@@ -97,9 +119,19 @@ class Express {
         this.server.close((error) => {
             if (error) {
                 this.logger.error('Could not close the server', error);
+                this.setState('error');
             }
             this.logger.warn('Closing the server');
+            this.setState('close');
         });
+    }
+    /**
+     * On event callback function
+     * @param state
+     * @param callback
+     */
+    public on(state: string, callback?: () => unknown): void {
+        this.emmitter.on(state, callback);
     }
 }
 

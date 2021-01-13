@@ -1,6 +1,6 @@
 import Logger from '../Logger';
 import * as mongoose from 'mongoose';
-import { Mockgoose } from 'mockgoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 const logger = new Logger({ service: 'MongoDB', filename: __filename });
 
@@ -40,10 +40,8 @@ export async function initializeMongooseDatabaseConnection(): Promise<mongoose.M
         });
 
         if (process.env.NODE_ENV === 'testing') {
-            const mockgoose = new Mockgoose(mongoose);
-            await mockgoose.prepareStorage();
-
-            return await mongoose.connect('mongodb://dummy.com/TestingDB', options);
+            const mongoServer = new MongoMemoryServer();
+            return await mongoose.connect(await mongoServer.getUri(), options);
         } else {
             return mongoose.connect(generateMongoDBURI(), options);
         }
