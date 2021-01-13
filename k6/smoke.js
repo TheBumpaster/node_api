@@ -9,7 +9,9 @@ export let options = {
     duration: '30s',
 };
 
-export function setup() {}
+export function setup() {
+    //
+}
 export default function (data) {
     let response = http.get('https://nodejs-api-stage.herokuapp.com/api/v1/');
 

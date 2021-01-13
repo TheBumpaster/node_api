@@ -31,10 +31,10 @@ class Express {
     public app: Application;
 
     /**
-     * Current state value 'initializing'|'ready'|'error'|'closed'
+     * Current state value 'initializing'|'ready'|'error'|'closed'|'running'
      * @variable {string} state
      */
-    private state: string;
+    public state: string;
 
     /**
      * NodeJS Event Emiiter used to pipe events on init.
@@ -99,7 +99,7 @@ class Express {
     private initialize(port: number): void {
         this.server = this.app.listen(port, () => {
             this.logger.info(`App is up and running on port ${port}`);
-            this.setState('ready');
+            this.setState('running');
         });
     }
 
@@ -107,7 +107,7 @@ class Express {
      * Setter function
      * @param state
      */
-    private setState(state: string): void {
+    public setState(state: string): void {
         this.state = state;
         this.emmitter.emit(state);
     }

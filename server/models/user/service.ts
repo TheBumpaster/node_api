@@ -16,7 +16,7 @@ export async function getUsers(query?: unknown, skip = 0, limit = 10): Promise<I
         Object.assign(lQuery, query);
     }
 
-    return service.find(query).skip(skip).limit(limit).exec();
+    return service.find(query, { password: 0, _v: 0, v: 0 }).skip(skip).limit(limit).exec();
 }
 
 /**

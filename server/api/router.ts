@@ -10,7 +10,7 @@ import AuthRouter from './v1/auth';
 
 class ExpressRouter {
     public static initializeRouter(app: Application): void {
-        app.use('/api/v1/', new SystemRouter().getRouter());
+        app.use('/api/v1/system/', new SystemRouter().getRouter());
         app.use('/api/v1/auth/', new AuthRouter().getRouter());
         app.use('/api/v1/users/', new UserRouter().getRouter());
 
