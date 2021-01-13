@@ -15,5 +15,6 @@ export function initializeServerEnvironment(): void {
         process.env.port = '3003';
         process.env.NODE_ENV = 'testing';
         process.env.SECRET = createRandomHash();
+        process.env.NEW_RELIC_ENABLED = 'false';
     }
 }

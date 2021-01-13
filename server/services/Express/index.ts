@@ -10,6 +10,8 @@ import { json, urlencoded } from 'body-parser';
 import * as session from 'express-session';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MongoDBStore = require('connect-mongodb-session')(session);
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const newRelic = require('newrelic');
 import { generateMongoDBURI } from '../Database';
 import { EventEmitter } from 'events';
 
@@ -47,6 +49,8 @@ class Express {
     constructor(port: number) {
         // Initialize express
         this.app = express();
+        newRelic.instrumentLoadedModule('express', this.app);
+
         this.setState('initializing');
 
         // Add security checks
