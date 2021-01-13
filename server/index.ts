@@ -14,4 +14,4 @@ initializeMongooseDatabaseConnection();
  */
 const server = new Express(Number(process.env.PORT));
 
-export default server;
+export default { server };

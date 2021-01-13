@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { createRandomHash } from '../../api/middleware/password';
 
 /**
  * Set environment variables on start
@@ -13,5 +14,6 @@ export function initializeServerEnvironment(): void {
         // some testing
         process.env.port = '3003';
         process.env.NODE_ENV = 'testing';
+        process.env.SECRET = createRandomHash();
     }
 }
