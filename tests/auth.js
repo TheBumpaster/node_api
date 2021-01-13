@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 let server;
 describe('Authorization tests', function () {
     this.timeout(50000);
-    /*before((done) => {
+    before((done) => {
         // Setup server
         server = require('../dist/index').default.server;
         server.on('ready', () => {
@@ -17,7 +17,6 @@ describe('Authorization tests', function () {
         // Destroy server
         server.close();
     });
-    */
 
     const user = {
         username: faker.internet.userName(),
