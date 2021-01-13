@@ -37,6 +37,29 @@ class AuthRouter {
      *       example:
      *         status: false,
      *         message: TypeError at line index.js:153:13
+     *     registerBody:
+     *       type: object
+     *       properties:
+     *         username:
+     *           type: string
+     *         email:
+     *           type: string
+     *         password:
+     *           type: string
+     *       required:
+     *         - username
+     *         - email
+     *         - password
+     *     loginBody:
+     *       type: object
+     *       properties:
+     *         email:
+     *           type: string
+     *         password:
+     *           type: string
+     *       required:
+     *         - email
+     *         - password
      */
     constructor() {
         /**
@@ -45,6 +68,12 @@ class AuthRouter {
          *   post:
          *     tags:
          *     - Authorization
+         *     requestBody:
+         *       required: true
+         *       content:
+         *         application/json:
+         *           schema:
+         *             $ref: '#/components/schemas/registerBody'
          *     description: |
          *      Creates new user and generates jwt and access token
          *     responses:
@@ -77,6 +106,12 @@ class AuthRouter {
          *     - Authorization
          *     description: |
          *      Creates a new session, checks users credentials and generates new jwt and access token.
+         *     requestBody:
+         *       required: true
+         *       content:
+         *         application/json:
+         *           schema:
+         *             $ref: '#/components/schemas/loginBody'
          *     responses:
          *       200:
          *         description: Response acknowledging successfully returned message
