@@ -43,7 +43,7 @@ class ExpressRouter {
              * Create UI page for swagger
              */
             const uriV1 =
-                process.env.NODE_ENV !== 'development'
+                process.env.HOST !== 'http://localhost'
                     ? `${process.env.HOST}/api/v1/docs`
                     : `${process.env.HOST}:${process.env.PORT}/api/v1/docs`;
             app.use(

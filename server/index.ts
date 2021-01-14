@@ -4,6 +4,7 @@ import { initializeMongooseDatabaseConnection } from './services/Database';
 
 // Initialize environment
 initializeServerEnvironment();
+require('newrelic');
 
 /**
  * Initialize express server

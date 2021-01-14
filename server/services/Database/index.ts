@@ -1,8 +1,12 @@
 import Logger from '../Logger';
 import * as mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const newRelic = require('newrelic');
 
 const logger = new Logger({ service: 'MongoDB', filename: __filename });
+
+newRelic.instrumentLoadedModule('mongoose', mongoose);
 
 /**
  * Creates a connection with MongoDB Atlas with mongoose client

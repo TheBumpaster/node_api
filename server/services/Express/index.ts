@@ -10,6 +10,8 @@ import { json, urlencoded } from 'body-parser';
 import * as session from 'express-session';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MongoDBStore = require('connect-mongodb-session')(session);
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const newRelic = require('newrelic');
 import { generateMongoDBURI } from '../Database';
 import { EventEmitter } from 'events';
 
@@ -46,7 +48,12 @@ class Express {
      */
     constructor(port: number) {
         // Initialize express
+        this.emmitter.on('ready', () => {
+            this.logger.info('Application is ready.');
+        });
         this.app = express();
+        newRelic.instrumentLoadedModule('express', this.app);
+
         this.setState('initializing');
 
         // Add security checks
@@ -98,7 +105,7 @@ class Express {
      */
     private initialize(port: number): void {
         this.server = this.app.listen(port, () => {
-            this.logger.info(`App is up and running on port ${port}`);
+            this.logger.warn(`App is up and running on port ${port}`);
             this.setState('running');
         });
     }
