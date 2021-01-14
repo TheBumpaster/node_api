@@ -136,6 +136,43 @@ class AuthRouter {
 
         /**
          * @swagger
+         * /api/v1/auth/refresh:
+         *   get:
+         *     tags:
+         *     - Authorization
+         *     description: |
+         *      Checks current session, checks access token and generates new jwt.
+         *     parameters:
+         *      - in: header
+         *        name: Authorization
+         *        description: Access token provided after registration or login.
+         *        schema:
+         *          type: string
+         *        required: true
+         *     responses:
+         *       200:
+         *         description: Response acknowledging successfully returned message
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/SuccessAuthRequest'
+         *       400:
+         *         description: Response acknowledging bad payload
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ServerError'
+         *       500:
+         *         description: Response acknowledging internal server error
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ServerError'
+         */
+        this.router.get('/refresh', AuthController.refresh);
+
+        /**
+         * @swagger
          * /api/v1/auth/logout:
          *   delete:
          *     tags:

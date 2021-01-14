@@ -57,12 +57,12 @@ class UserRouter {
          *         name: skip
          *         schema:
          *           type: number
-         *         description: Number of matches to skip from begging of query (default: 0)
+         *         description: Number of matches to skip from begging of query (default 0)
          *       - in: query
          *         name: limit
          *         schema:
          *           type: number
-         *         description: Number of matches in total to return (default: 10)
+         *         description: Number of matches in total to return (default 10)
          *     responses:
          *       200:
          *         description: Response acknowledging successfully returned message

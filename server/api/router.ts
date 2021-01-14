@@ -22,7 +22,7 @@ class ExpressRouter {
              * @param response
              */
             app.use('/api/v1/docs', (request, response) => {
-                glob(join(__dirname, './v1/**/*.js'), (err: unknown, urls: unknown[]) => {
+                glob(join(__dirname, './v1/**/*.*'), (err: unknown, urls: unknown[]) => {
                     const options = {
                         apis: urls,
                         swaggerDefinition: {

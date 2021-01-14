@@ -126,7 +126,7 @@ class AuthController {
                 response.status(400);
                 return response.json({
                     status: false,
-                    message: 'User already exists with this email',
+                    message: 'User does not exist with this email',
                 });
             }
             // handle session for refresh token & jwt
@@ -182,6 +182,51 @@ class AuthController {
             });
             response.status(200);
             response.end();
+        } catch (e) {
+            response.status(500);
+            return response.json({
+                status: false,
+                error: e,
+            });
+        }
+    }
+
+    public static async refresh(request: Request, response: Response): Promise<unknown> {
+        console.log(request.session);
+        if (!request.header('Authorization')) {
+            response.status(403);
+            return response.json({
+                status: false,
+                message: 'Invalid access token',
+            });
+        }
+        try {
+            const access_token = request.header('Authorization');
+
+            if ((request.session as IAuthSession).user.token === access_token) {
+                const user = await UserModel.getUserById((request.session as IAuthSession).user._id);
+                const jwt = sign(
+                    {
+                        _id: user._id,
+                        email: user.email,
+                        username: user.username,
+                    },
+                    process.env.SECRET,
+                    { expiresIn: '10min' },
+                );
+
+                response.status(200);
+                return response.json({
+                    status: true,
+                    jwt,
+                });
+            } else {
+                response.status(403);
+                return response.json({
+                    status: false,
+                    message: 'Invalid access token',
+                });
+            }
         } catch (e) {
             response.status(500);
             return response.json({
