@@ -30,6 +30,53 @@ class UserController {
             return response.json({ error: e });
         }
     }
+    /**
+     * Create a new user
+     * @param request
+     * @param response
+     */
+    public static async newUser(request: Request, response: Response) {
+        try {
+        } catch (e) {
+            response.status(500);
+            return response.json({
+                status: false,
+                error: e,
+            });
+        }
+    }
+
+    /**
+     * Update a user
+     * @param request
+     * @param response
+     */
+    public static async updateUser(request: Request, response: Response) {
+        try {
+        } catch (e) {
+            response.status(500);
+            return response.json({
+                status: false,
+                error: e,
+            });
+        }
+    }
+
+    /**
+     * Delete a user
+     * @param request
+     * @param response
+     */
+    public static async deleteUser(request: Request, response: Response) {
+        try {
+        } catch (e) {
+            response.status(500);
+            return response.json({
+                status: false,
+                error: e,
+            });
+        }
+    }
 
     private static transformQueryKeys(query: string): unknown {
         // {key:value},{key:value}

@@ -7,7 +7,7 @@ export interface IAuthRequest extends Request {
     user: IUser;
 }
 export interface IAuthSession extends Session {
-    user: { _id: string; token: string };
+    user: { id: string; token: string };
 }
 export function authenticationMiddleware(request: IAuthRequest, response: Response, next: NextFunction): unknown {
     const token = request.header('Authorization');

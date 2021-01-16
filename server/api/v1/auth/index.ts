@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import AuthController from './controller';
-
+import { OpenidRequest, OpenidResponse } from 'express-openid-connect';
 /**
  * Group of unique auth routes
  * @class AuthRouter
@@ -144,7 +144,7 @@ class AuthRouter {
          *      Checks current session, checks access token and generates new jwt.
          *     parameters:
          *      - in: header
-         *        name: Authorization
+         *        name: X-Access-Token
          *        description: Access token provided after registration or login.
          *        schema:
          *          type: string
@@ -179,6 +179,12 @@ class AuthRouter {
          *     - Authorization
          *     description: |
          *      Destroys a session, would not be able to refresh jwt token
+         *     parameters:
+         *      - in: header
+         *        name: X-Access-Token
+         *        content:
+         *          type: String
+         *        description: Your refresh token
          *     responses:
          *       200:
          *         description: Response acknowledging successfully returned message

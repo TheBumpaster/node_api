@@ -1,4 +1,5 @@
 import { IUser, IUserDocument, IUserModel } from '.';
+import { IUserProfile } from './modules/profile';
 
 /**
  *
@@ -71,5 +72,37 @@ export async function deleteUser(id: string): Promise<unknown> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const service: IUserModel = this;
 
-    return service.deleteOne({ _id: id });
+    return service.deleteOne({ id: id });
+}
+
+/**
+ *
+ * @param id
+ * @param profile
+ */
+export async function updateUserProfile(id: string, profile: IUserProfile): Promise<IUserDocument> {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const service: IUserModel = this;
+
+    return service.findByIdAndUpdate(id, { $set: { profile } });
+}
+
+export async function setUserToken(id: string, token: string): Promise<IUserDocument> {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const service: IUserModel = this;
+    const validUntil = new Date(Date.now() + 3600 * 1000 * 24 * 1); // One day
+
+    const payload = {
+        token,
+        validUntil,
+    };
+
+    return service.findByIdAndUpdate(id, { $set: { refresh_token: [payload] } });
+}
+
+export async function unsetUserToken(id: string): Promise<IUserDocument> {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const service: IUserModel = this;
+
+    return service.findByIdAndUpdate(id, { $unset: { refresh_token: '' } });
 }

@@ -14,7 +14,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const newRelic = require('newrelic');
 import { generateMongoDBURI } from '../Database';
 import { EventEmitter } from 'events';
-
+import { auth } from 'express-openid-connect';
 /**
  * Main expressJS class settings
  */
@@ -91,6 +91,19 @@ class Express {
                         : undefined,
             }),
         );
+
+        // Add Authentication
+        const config = {
+            baseURL: '',
+            authRequired: false,
+            auth0Logout: true,
+            secret: process.env.SECRET,
+            clientID: process.env.AUTH0_CLIENTID,
+            issuerBaseURL: process.env.AUTH0_ISSUER_URL,
+        };
+        config.baseURL =
+            process.env.HOST === 'http://localhost' ? `${process.env.HOST}:${process.env.PORT}` : process.env.HOST;
+        this.app.use(auth(config));
 
         // Add API Router
         ExpressRouter.initializeRouter(this.app);

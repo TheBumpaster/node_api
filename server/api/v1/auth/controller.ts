@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as Joi from 'joi';
 import { UserModel } from '../../../models/user';
 import { sign } from 'jsonwebtoken';
-import { hashPassword } from '../../middleware/password';
+import { createRandomHash, hashPassword } from '../../middleware/password';
 import { IAuthSession } from '../../middleware/auth';
 
 /**
@@ -63,16 +63,12 @@ class AuthController {
             const user = await UserModel.createUser(payload);
 
             // handle session for refresh token & jwt
-            const token = hashPassword(new Date().toDateString());
+            const token = createRandomHash();
+            await UserModel.setUserToken(user.id, token);
 
-            (request.session as IAuthSession).user = {
-                _id: user._id,
-                token,
-            };
-            request.session.save();
             const jwt = sign(
                 {
-                    _id: user._id,
+                    id: user.id,
                     email: user.email,
                     username: user.username,
                 },
@@ -130,17 +126,12 @@ class AuthController {
                 });
             }
             // handle session for refresh token & jwt
-            const token = hashPassword(new Date().toDateString());
-
-            (request.session as IAuthSession).user = {
-                _id: user._id,
-                token,
-            };
-            request.session.save();
+            const token = createRandomHash();
+            await UserModel.setUserToken(user.id, token);
 
             const jwt = sign(
                 {
-                    _id: user._id,
+                    id: user.id,
                     email: user.email,
                     username: user.username,
                 },
@@ -171,15 +162,14 @@ class AuthController {
      */
     public static async logout(request: Request, response: Response): Promise<unknown> {
         try {
-            request.session.destroy((error) => {
-                if (error) {
-                    response.status(501);
-                    return response.json({
-                        status: false,
-                        message: error,
-                    });
-                }
-            });
+            // Find user with setted token and delete it
+            await UserModel.updateOne(
+                {
+                    'refresh_tokens.$.token': request.header('X-Access-Token'),
+                },
+                { $unset: { refresh_token: '' } },
+            );
+
             response.status(200);
             response.end();
         } catch (e) {
@@ -193,7 +183,7 @@ class AuthController {
 
     public static async refresh(request: Request, response: Response): Promise<unknown> {
         console.log(request.session);
-        if (!request.header('Authorization')) {
+        if (!request.header('X-Access-Token')) {
             response.status(403);
             return response.json({
                 status: false,
@@ -201,32 +191,31 @@ class AuthController {
             });
         }
         try {
-            const access_token = request.header('Authorization');
-
-            if ((request.session as IAuthSession).user.token === access_token) {
-                const user = await UserModel.getUserById((request.session as IAuthSession).user._id);
-                const jwt = sign(
-                    {
-                        _id: user._id,
-                        email: user.email,
-                        username: user.username,
-                    },
-                    process.env.SECRET,
-                    { expiresIn: '10min' },
-                );
-
-                response.status(200);
-                return response.json({
-                    status: true,
-                    jwt,
-                });
-            } else {
-                response.status(403);
+            const user = await UserModel.findOne({
+                'refresh_tokens.$.token': request.header('X-Access-Token'),
+            });
+            if (!user) {
+                response.status(500);
                 return response.json({
                     status: false,
-                    message: 'Invalid access token',
+                    message: 'Invalid token. Sign in with credentials.',
                 });
             }
+            const jwt = sign(
+                {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                },
+                process.env.SECRET,
+                { expiresIn: '10min' },
+            );
+
+            response.status(200);
+            return response.json({
+                status: true,
+                jwt,
+            });
         } catch (e) {
             response.status(500);
             return response.json({
